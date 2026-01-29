@@ -1,205 +1,264 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elisaldi | Consultoría Fiscal & Financiera</title>
-
-    <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Merriweather:wght@300;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         elisaldi: {
-                            dark: '#0D3D35',
-                            light: '#72B4A5',
-                            accent: '#F0FDF4',
-                            text: '#1F2937'
+                            dark: '#0D3D35',    // Verde Bosque Brochure
+                            light: '#72B4A5',   // Verde Agua Brochure
+                            accent: '#C4A47C',  // Dorado sutil para "Abundancia"
+                            slate: '#F8FAFC'
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        serif: ['Merriweather', 'serif']
+                        serif: ['Merriweather', 'serif'],
                     }
                 }
             }
         }
     </script>
-
     <style>
-        html { scroll-behavior: smooth; }
-
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 350px;
-            margin: auto;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        .hero-gradient {
+            background: linear-gradient(rgba(13, 61, 53, 0.85), rgba(13, 61, 53, 0.85)), 
+                        url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
+<body class="bg-slate-50 text-gray-800 font-sans">
 
-<body class="bg-gray-50 text-elisaldi-text font-sans antialiased">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <span class="font-serif text-3xl font-bold text-elisaldi-dark tracking-tight">Elisaldi</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-600 hover:text-elisaldi-light font-medium transition">Inicio</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-elisaldi-light font-medium transition">Servicios</a>
+                    <a href="#talleres" class="text-gray-600 hover:text-elisaldi-light font-medium transition">Talleres</a>
+                    <a href="#nosotros" class="text-gray-600 hover:text-elisaldi-light font-medium transition">Nosotros</a>
+                    <a href="#contacto" class="bg-elisaldi-dark text-white px-6 py-2 rounded-full hover:bg-elisaldi-light transition shadow-md">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<!-- NAV -->
-<nav class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <div class="h-10 w-10 bg-elisaldi-dark rounded-lg flex items-center justify-center text-white font-bold text-xl">E</div>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-gradient min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="font-serif italic text-2xl md:text-3xl text-elisaldi-light mb-4">"La diligencia guiada por la sabiduría conduce a la abundancia"</h2>
+            <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">Consultoría Fiscal <br><span class="text-elisaldi-light">& Financiera</span></h1>
+            <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10">Más de 10 años brindando seguridad, transparencia y crecimiento a los negocios de Santo Domingo Este.</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="#contacto" class="bg-elisaldi-light text-elisaldi-dark font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:bg-white transition">Solicitar Consultoría</a>
+                <a href="#servicios" class="border-2 border-white text-white font-bold px-10 py-4 rounded-full text-lg hover:bg-white/10 transition">Ver Brochure</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Quiénes Somos? -->
+    <section id="nosotros" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
             <div>
-                <h1 class="font-serif text-xl font-bold text-elisaldi-dark">Elisaldi</h1>
-                <p class="text-[10px] text-elisaldi-light font-bold uppercase tracking-widest">Consultoría Fiscal</p>
-            </div>
-        </div>
-        <div class="hidden md:flex space-x-6">
-            <a href="#services" class="hover:text-elisaldi-light">Servicios</a>
-            <a href="#values" class="hover:text-elisaldi-light">Valores</a>
-            <a href="#contact" class="bg-elisaldi-dark text-white px-4 py-2 rounded-md">Contacto</a>
-        </div>
-    </div>
-</nav>
-
-<!-- HERO -->
-<header class="bg-elisaldi-dark text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 md:flex items-center">
-        <div class="md:w-2/3">
-            <h2 class="text-4xl md:text-6xl font-serif font-bold mb-6">
-                “La diligencia guiada por la sabiduría conduce a la abundancia”
-            </h2>
-            <p class="text-xl text-gray-300 mb-8">
-                Más de 10 años de experiencia garantizando su seguridad fiscal y financiera ante la DGII.
-            </p>
-            <a href="#contact" class="bg-elisaldi-light px-8 py-4 rounded-full font-bold inline-block">
-                Solicitar Consultoría
-            </a>
-        </div>
-    </div>
-</header>
-
-<!-- SERVICES -->
-<section id="services" class="py-20 max-w-7xl mx-auto px-4">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl font-serif font-bold">Nuestra Especialidad</h2>
-        <p class="text-gray-500">Selecciona un área para conocer más</p>
-    </div>
-
-    <div class="flex flex-col lg:flex-row gap-12 bg-white p-8 rounded-3xl shadow-sm">
-        <div class="lg:w-1/2">
-            <div class="chart-container">
-                <canvas id="servicesChart"></canvas>
-            </div>
-        </div>
-
-        <div class="lg:w-1/2 flex items-center">
-            <div id="service-info" class="fade-in bg-elisaldi-accent p-8 rounded-2xl w-full">
-                <h3 class="text-2xl font-bold text-elisaldi-dark mb-4">Bienvenido</h3>
-                <p class="text-gray-600">
-                    Haga clic en una categoría del gráfico para conocer nuestros servicios fiscales y financieros.
+                <h4 class="text-elisaldi-light font-bold uppercase tracking-widest mb-2">Trayectoria y Confianza</h4>
+                <h2 class="text-4xl font-serif font-bold text-elisaldi-dark mb-6">¿Quiénes Somos?</h2>
+                <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                    Somos Contadores Públicos Autorizados adaptados a los nuevos tiempos. Utilizamos herramientas tecnológicas de vanguardia para agilizar procesos y ofrecer soluciones claras bajo normativas <strong>NIC y NIIF</strong>.
                 </p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="border-l-4 border-elisaldi-light pl-4">
+                        <span class="block text-3xl font-bold text-elisaldi-dark">10+</span>
+                        <span class="text-gray-500">Años de Experiencia</span>
+                    </div>
+                    <div class="border-l-4 border-elisaldi-light pl-4">
+                        <span class="block text-3xl font-bold text-elisaldi-dark">DGII</span>
+                        <span class="text-gray-500">Dominio Normativo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-elisaldi-slate p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-elisaldi-dark mb-4"><i class="fas fa-bullseye text-elisaldi-light mr-2"></i>Nuestros Valores</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li><i class="fas fa-check text-elisaldi-light mr-2"></i> Integridad y Ética Profesional</li>
+                        <li><i class="fas fa-check text-elisaldi-light mr-2"></i> Transparencia y Claridad</li>
+                        <li><i class="fas fa-check text-elisaldi-light mr-2"></i> Agilidad y Resultados</li>
+                        <li><i class="fas fa-check text-elisaldi-light mr-2"></i> Liderazgo y Mejora Continua</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- VALUES -->
-<section id="values" class="py-20 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-xl shadow-sm card-hover">
-            <div class="text-3xl mb-4">🛡️</div>
-            <h4 class="font-bold text-xl mb-2">Integridad</h4>
-            <p class="text-gray-500">Honestidad y ética profesional en cada proceso.</p>
+    <!-- Brochure de Servicios -->
+    <section id="servicios" class="py-24 bg-elisaldi-dark text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h4 class="text-elisaldi-light font-bold uppercase tracking-widest mb-2">Nuestro Portafolio</h4>
+                <h2 class="text-4xl font-serif font-bold">Brochure de Servicios</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="bg-white/10 p-8 rounded-3xl border border-white/10 hover:bg-white/20 transition group">
+                    <div class="w-14 h-14 bg-elisaldi-light rounded-2xl flex items-center justify-center mb-6 text-2xl text-elisaldi-dark">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Contabilidad Fiscal</h3>
+                    <p class="text-gray-300">Cumplimiento de declaraciones ante la DGII, gestión de <strong>ITBIS</strong>, IR-1, IR-2 y representación normativa vigente.</p>
+                </div>
+                <!-- Servicio 2 -->
+                <div class="bg-white/10 p-8 rounded-3xl border border-white/10 hover:bg-white/20 transition group">
+                    <div class="w-14 h-14 bg-elisaldi-light rounded-2xl flex items-center justify-center mb-6 text-2xl text-elisaldi-dark">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Contabilidad Financiera</h3>
+                    <p class="text-gray-300">Revisión y preparación de estados financieros confiables bajo normativas <strong>NIC y NIIF</strong> para toma de decisiones.</p>
+                </div>
+                <!-- Servicio 3 -->
+                <div class="bg-white/10 p-8 rounded-3xl border border-white/10 hover:bg-white/20 transition group">
+                    <div class="w-14 h-14 bg-elisaldi-light rounded-2xl flex items-center justify-center mb-6 text-2xl text-elisaldi-dark">
+                        <i class="fas fa-users-gear"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Nómina y TSS</h3>
+                    <p class="text-gray-300">Gestión integral de nómina, deducciones, prestaciones y cumplimiento ante la <strong>TSS</strong> y el Ministerio de Trabajo.</p>
+                </div>
+            </div>
+            <div class="mt-12 grid md:grid-cols-2 gap-8 bg-elisaldi-light/10 p-10 rounded-3xl border border-elisaldi-light/20">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-elisaldi-light">Otros Servicios</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-200">
+                        <li><i class="fas fa-angle-right mr-2 text-elisaldi-light"></i>Constitución de empresas</li>
+                        <li><i class="fas fa-angle-right mr-2 text-elisaldi-light"></i>Control de inventarios</li>
+                        <li><i class="fas fa-angle-right mr-2 text-elisaldi-light"></i>Participación en licitaciones</li>
+                        <li><i class="fas fa-angle-right mr-2 text-elisaldi-light"></i>Políticas contables</li>
+                    </ul>
+                </div>
+                <div class="border-t md:border-t-0 md:border-l border-white/10 md:pl-8 pt-8 md:pt-0">
+                    <h3 class="text-2xl font-bold mb-4 text-elisaldi-light">Políticas de Calidad</h3>
+                    <p class="text-sm text-gray-300 italic">"Garantizamos el manejo responsable, seguro y reservado de los datos fiscales y personales de nuestros clientes bajo estrictas políticas de confidencialidad."</p>
+                </div>
+            </div>
         </div>
-        <div class="bg-white p-8 rounded-xl shadow-sm card-hover">
-            <div class="text-3xl mb-4">🔍</div>
-            <h4 class="font-bold text-xl mb-2">Transparencia</h4>
-            <p class="text-gray-500">Información clara, precisa y confiable.</p>
+    </section>
+
+    <!-- Sección de Talleres y Cursos -->
+    <section id="talleres" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h4 class="text-elisaldi-light font-bold uppercase tracking-widest mb-2">Capacitación</h4>
+                    <h2 class="text-4xl font-serif font-bold text-elisaldi-dark">Talleres y Cursos</h2>
+                </div>
+                <p class="text-gray-500 md:max-w-md mt-4">Formamos líderes financieros con las herramientas más actualizadas del mercado dominicano.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="flex bg-elisaldi-slate rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="bg-elisaldi-dark w-1/3 flex items-center justify-center p-4">
+                        <i class="fas fa-calculator text-4xl text-elisaldi-light"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Preparación de ITBIS (Formulario IT-1)</h3>
+                        <p class="text-gray-600 text-sm mb-4">Aprende el llenado correcto, anexos y conciliaciones fiscales de manera práctica.</p>
+                        <span class="inline-block bg-elisaldi-light/20 text-elisaldi-dark text-xs font-bold px-3 py-1 rounded">Próximamente</span>
+                    </div>
+                </div>
+                <div class="flex bg-elisaldi-slate rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="bg-elisaldi-dark w-1/3 flex items-center justify-center p-4">
+                        <i class="fas fa-user-check text-4xl text-elisaldi-light"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Nóminas y Gestión de TSS</h3>
+                        <p class="text-gray-600 text-sm mb-4">Cálculos de seguridad social, INFOTEP y reportes ante el SUIR.</p>
+                        <span class="inline-block bg-elisaldi-light/20 text-elisaldi-dark text-xs font-bold px-3 py-1 rounded">Inscripciones Abiertas</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="bg-white p-8 rounded-xl shadow-sm card-hover">
-            <div class="text-3xl mb-4">🚀</div>
-            <h4 class="font-bold text-xl mb-2">Agilidad</h4>
-            <p class="text-gray-500">Procesos eficientes apoyados en tecnología.</p>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section id="contacto" class="py-24 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden grid md:grid-cols-5">
+                <div class="md:col-span-2 bg-elisaldi-dark p-12 text-white">
+                    <h2 class="text-3xl font-serif font-bold mb-8">Información de Contacto</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-map-marker-alt text-elisaldi-light mt-1"></i>
+                            <p>Calle La Pared, Santo Domingo Este, Rep. Dom.</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-phone text-elisaldi-light mt-1"></i>
+                            <p>(829) 687-9987 <br> (809) 953-0836</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-envelope text-elisaldi-light mt-1"></i>
+                            <p>Consultorias@elisaldi.com.do</p>
+                        </div>
+                    </div>
+                    <div class="mt-12 flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-elisaldi-light transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-elisaldi-light transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/8099530836" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-green-500 transition"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="md:col-span-3 p-12">
+                    <h2 class="text-3xl font-serif font-bold text-elisaldi-dark mb-8">Envíenos un mensaje</h2>
+                    <!-- Conexión a Correo Principal vía Formspree (Gratis y funcional) -->
+                    <form action="https://formspree.io/f/Consultorias@elisaldi.com.do" method="POST" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Nombre Completo</label>
+                                <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Correo Electrónico</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Asunto (Servicio o Taller)</label>
+                            <select name="subject" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
+                                <option>Consultoría Fiscal</option>
+                                <option>Taller ITBIS / TSS</option>
+                                <option>Gestión de Nómina</option>
+                                <option>Otros</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Mensaje</label>
+                            <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-elisaldi-dark text-white font-bold py-4 rounded-xl shadow-lg hover:bg-elisaldi-light transition">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CONTACT -->
-<footer id="contact" class="bg-elisaldi-dark text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
-        <div>
-            <h2 class="text-3xl font-serif font-bold mb-6">Contacto</h2>
-            <p class="text-gray-400 mb-6">Soluciones fiscales orientadas al crecimiento.</p>
-            <p>📞 (829) 687-9987 / (809) 953-0836</p>
-            <p>📧 Consultorias@elisaldi.com.do</p>
-            <p>📍 Santo Domingo Este</p>
+    <!-- Footer -->
+    <footer class="bg-elisaldi-dark py-12 text-center text-white border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4">
+            <span class="font-serif text-3xl font-bold tracking-tight block mb-4">Elisaldi</span>
+            <p class="text-gray-400 text-sm mb-6">Excelencia en servicios fiscales y financieros bajo estándares internacionales.</p>
+            <div class="text-gray-500 text-xs">
+                © 2024 Elisaldi Consultoría Fiscal & Financiera. Todos los derechos reservados.
+            </div>
         </div>
-        <div class="bg-white/5 p-8 rounded-2xl">
-            <h4 class="font-bold mb-4">Horario</h4>
-            <p class="text-gray-400">L–V: 9:00 AM – 6:00 PM</p>
-            <p class="text-gray-400">Sábados: Previa cita</p>
-        </div>
-    </div>
-    <div class="text-center mt-12 text-gray-500 text-sm">
-        © 2024 Elisaldi Consultoría Fiscal & Financiera
-    </div>
-</footer>
-
-<script>
-const ctx = document.getElementById('servicesChart');
-
-const data = {
-    labels: ['IR-2', 'IR-1', 'Cierre Fiscal', 'Auditoría'],
-    datasets: [{
-        data: [30, 25, 25, 20],
-        backgroundColor: ['#0D3D35', '#72B4A5', '#1F2937', '#A7F3D0'],
-        borderWidth: 0
-    }]
-};
-
-const info = {
-    'IR-2': 'Declaración de Impuesto sobre la Renta para sociedades.',
-    'IR-1': 'Declaración para personas físicas y profesionales independientes.',
-    'Cierre Fiscal': 'Preparación de estados financieros y cierre anual.',
-    'Auditoría': 'Auditoría bajo normas NIIF y NIC.'
-};
-
-new Chart(ctx, {
-    type: 'doughnut',
-    data,
-    options: {
-        onClick: (_, items) => {
-            if (items.length) {
-                const label = data.labels[items[0].index];
-                document.getElementById('service-info').innerHTML =
-                    `<h3 class="text-2xl font-bold mb-4">${label}</h3>
-                     <p class="text-gray-600">${info[label]}</p>`;
-            }
-        }
-    }
-});
-</script>
+    </footer>
 
 </body>
 </html>
