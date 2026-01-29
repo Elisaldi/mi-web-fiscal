@@ -1,45 +1,205 @@
-E
-Elisaldi
-Servicios
-WHATSAPP
-"La diligencia guiada por la sabiduría conduce a la abundancia"
-Asesoría Fiscal Profesional con más de 10 años de trayectoria
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elisaldi | Consultoría Fiscal & Financiera</title>
 
-Nuestros Servicios
-Contacto
-Áreas de Especialidad
-Pulse en el gráfico circular para conocer los detalles de cada gestión fiscal.
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-Consultoría Especializada
-Seleccione una categoría para visualizar cómo optimizamos sus procesos contables y garantizamos su seguridad ante la DGII.
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-• Auditorías basadas en NIC y NIIF
-• Gestión experta de IR-1 e IR-2
-• Cierre Fiscal con rigor técnico
-Nuestros Valores Centrales
-🛡️
-Integridad
-Fomentamos el respeto, la responsabilidad y el trabajo en equipo en cada auditoría.
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Merriweather:wght@300;700&display=swap" rel="stylesheet">
 
-🔍
-Transparencia
-Garantizamos ética profesional y absoluta claridad en todos sus procesos fiscales.
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        elisaldi: {
+                            dark: '#0D3D35',
+                            light: '#72B4A5',
+                            accent: '#F0FDF4',
+                            text: '#1F2937'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
 
-🚀
-Agilidad
-Respuesta eficiente con enfoque en resultados inmediatos mediante herramientas modernas.
+    <style>
+        html { scroll-behavior: smooth; }
 
-Elisaldi
-Contador Público Autorizado con dominio de normativas fiscales vigentes. Ofrecemos soluciones eficientes orientadas al crecimiento y la seguridad financiera empresarial.
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            margin: auto;
+        }
 
-📞
-(829) 687-9987 | (809) 953-0836
-📧
-Consultorias@elisaldi.com.do
-📍
-Calle La Pared, Santo Domingo Este
-📸
-@CONSULTORIAFISCALELISALDI
-Agendar Consultoría por WhatsApp
-Enviar un Correo Electrónico
-© 2024 Elisaldi Consultoría Fiscal & Financiera. Santo Domingo, República Dominicana.
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-elisaldi-text font-sans antialiased">
+
+<!-- NAV -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="h-10 w-10 bg-elisaldi-dark rounded-lg flex items-center justify-center text-white font-bold text-xl">E</div>
+            <div>
+                <h1 class="font-serif text-xl font-bold text-elisaldi-dark">Elisaldi</h1>
+                <p class="text-[10px] text-elisaldi-light font-bold uppercase tracking-widest">Consultoría Fiscal</p>
+            </div>
+        </div>
+        <div class="hidden md:flex space-x-6">
+            <a href="#services" class="hover:text-elisaldi-light">Servicios</a>
+            <a href="#values" class="hover:text-elisaldi-light">Valores</a>
+            <a href="#contact" class="bg-elisaldi-dark text-white px-4 py-2 rounded-md">Contacto</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="bg-elisaldi-dark text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 md:flex items-center">
+        <div class="md:w-2/3">
+            <h2 class="text-4xl md:text-6xl font-serif font-bold mb-6">
+                “La diligencia guiada por la sabiduría conduce a la abundancia”
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Más de 10 años de experiencia garantizando su seguridad fiscal y financiera ante la DGII.
+            </p>
+            <a href="#contact" class="bg-elisaldi-light px-8 py-4 rounded-full font-bold inline-block">
+                Solicitar Consultoría
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- SERVICES -->
+<section id="services" class="py-20 max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-serif font-bold">Nuestra Especialidad</h2>
+        <p class="text-gray-500">Selecciona un área para conocer más</p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-12 bg-white p-8 rounded-3xl shadow-sm">
+        <div class="lg:w-1/2">
+            <div class="chart-container">
+                <canvas id="servicesChart"></canvas>
+            </div>
+        </div>
+
+        <div class="lg:w-1/2 flex items-center">
+            <div id="service-info" class="fade-in bg-elisaldi-accent p-8 rounded-2xl w-full">
+                <h3 class="text-2xl font-bold text-elisaldi-dark mb-4">Bienvenido</h3>
+                <p class="text-gray-600">
+                    Haga clic en una categoría del gráfico para conocer nuestros servicios fiscales y financieros.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VALUES -->
+<section id="values" class="py-20 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-sm card-hover">
+            <div class="text-3xl mb-4">🛡️</div>
+            <h4 class="font-bold text-xl mb-2">Integridad</h4>
+            <p class="text-gray-500">Honestidad y ética profesional en cada proceso.</p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-sm card-hover">
+            <div class="text-3xl mb-4">🔍</div>
+            <h4 class="font-bold text-xl mb-2">Transparencia</h4>
+            <p class="text-gray-500">Información clara, precisa y confiable.</p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-sm card-hover">
+            <div class="text-3xl mb-4">🚀</div>
+            <h4 class="font-bold text-xl mb-2">Agilidad</h4>
+            <p class="text-gray-500">Procesos eficientes apoyados en tecnología.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<footer id="contact" class="bg-elisaldi-dark text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+        <div>
+            <h2 class="text-3xl font-serif font-bold mb-6">Contacto</h2>
+            <p class="text-gray-400 mb-6">Soluciones fiscales orientadas al crecimiento.</p>
+            <p>📞 (829) 687-9987 / (809) 953-0836</p>
+            <p>📧 Consultorias@elisaldi.com.do</p>
+            <p>📍 Santo Domingo Este</p>
+        </div>
+        <div class="bg-white/5 p-8 rounded-2xl">
+            <h4 class="font-bold mb-4">Horario</h4>
+            <p class="text-gray-400">L–V: 9:00 AM – 6:00 PM</p>
+            <p class="text-gray-400">Sábados: Previa cita</p>
+        </div>
+    </div>
+    <div class="text-center mt-12 text-gray-500 text-sm">
+        © 2024 Elisaldi Consultoría Fiscal & Financiera
+    </div>
+</footer>
+
+<script>
+const ctx = document.getElementById('servicesChart');
+
+const data = {
+    labels: ['IR-2', 'IR-1', 'Cierre Fiscal', 'Auditoría'],
+    datasets: [{
+        data: [30, 25, 25, 20],
+        backgroundColor: ['#0D3D35', '#72B4A5', '#1F2937', '#A7F3D0'],
+        borderWidth: 0
+    }]
+};
+
+const info = {
+    'IR-2': 'Declaración de Impuesto sobre la Renta para sociedades.',
+    'IR-1': 'Declaración para personas físicas y profesionales independientes.',
+    'Cierre Fiscal': 'Preparación de estados financieros y cierre anual.',
+    'Auditoría': 'Auditoría bajo normas NIIF y NIC.'
+};
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data,
+    options: {
+        onClick: (_, items) => {
+            if (items.length) {
+                const label = data.labels[items[0].index];
+                document.getElementById('service-info').innerHTML =
+                    `<h3 class="text-2xl font-bold mb-4">${label}</h3>
+                     <p class="text-gray-600">${info[label]}</p>`;
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
