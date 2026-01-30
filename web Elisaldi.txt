@@ -14,7 +14,7 @@
                     colors: {
                         elisaldi: {
                             dark: '#0D3D35',    // Verde Bosque Brochure
-                            light: '#72B4A5',   // Verde Agua Brochure
+                            light: '#72B4A5',    // Verde Agua Brochure
                             accent: '#C4A47C',  // Dorado sutil para "Abundancia"
                             slate: '#F8FAFC'
                         }
@@ -38,7 +38,6 @@
 </head>
 <body class="bg-slate-50 text-gray-800 font-sans">
 
-    <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
@@ -56,7 +55,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="inicio" class="hero-gradient min-h-screen flex items-center pt-20">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="font-serif italic text-2xl md:text-3xl text-elisaldi-light mb-4">"La diligencia guiada por la sabiduría conduce a la abundancia"</h2>
@@ -69,7 +67,6 @@
         </div>
     </section>
 
-    <!-- ¿Quiénes Somos? -->
     <section id="nosotros" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -103,7 +100,6 @@
         </div>
     </section>
 
-    <!-- Brochure de Servicios -->
     <section id="servicios" class="py-24 bg-elisaldi-dark text-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
@@ -111,7 +107,6 @@
                 <h2 class="text-4xl font-serif font-bold">Brochure de Servicios</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Servicio 1 -->
                 <div class="bg-white/10 p-8 rounded-3xl border border-white/10 hover:bg-white/20 transition group">
                     <div class="w-14 h-14 bg-elisaldi-light rounded-2xl flex items-center justify-center mb-6 text-2xl text-elisaldi-dark">
                         <i class="fas fa-file-invoice-dollar"></i>
@@ -119,7 +114,6 @@
                     <h3 class="text-2xl font-bold mb-4">Contabilidad Fiscal</h3>
                     <p class="text-gray-300">Cumplimiento de declaraciones ante la DGII, gestión de <strong>ITBIS</strong>, IR-1, IR-2 y representación normativa vigente.</p>
                 </div>
-                <!-- Servicio 2 -->
                 <div class="bg-white/10 p-8 rounded-3xl border border-white/10 hover:bg-white/20 transition group">
                     <div class="w-14 h-14 bg-elisaldi-light rounded-2xl flex items-center justify-center mb-6 text-2xl text-elisaldi-dark">
                         <i class="fas fa-chart-line"></i>
@@ -127,7 +121,6 @@
                     <h3 class="text-2xl font-bold mb-4">Contabilidad Financiera</h3>
                     <p class="text-gray-300">Revisión y preparación de estados financieros confiables bajo normativas <strong>NIC y NIIF</strong> para toma de decisiones.</p>
                 </div>
-                <!-- Servicio 3 -->
                 <div class="bg-white/10 p-8 rounded-3xl border border-white/10 hover:bg-white/20 transition group">
                     <div class="w-14 h-14 bg-elisaldi-light rounded-2xl flex items-center justify-center mb-6 text-2xl text-elisaldi-dark">
                         <i class="fas fa-users-gear"></i>
@@ -154,7 +147,6 @@
         </div>
     </section>
 
-    <!-- Sección de Talleres y Cursos -->
     <section id="talleres" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12">
@@ -189,7 +181,6 @@
         </div>
     </section>
 
-    <!-- Formulario de Contacto -->
     <section id="contacto" class="py-24 bg-slate-100">
         <div class="max-w-7xl mx-auto px-4">
             <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden grid md:grid-cols-5">
@@ -217,30 +208,30 @@
                 </div>
                 <div class="md:col-span-3 p-12">
                     <h2 class="text-3xl font-serif font-bold text-elisaldi-dark mb-8">Envíenos un mensaje</h2>
-                    <!-- Conexión a Correo Principal vía Formspree (Gratis y funcional) -->
-                    <form action="https://formspree.io/f/Consultorias@elisaldi.com.do" method="POST" class="space-y-6">
+                    
+                    <form action="https://formspree.io/f/mbdypddz" method="POST" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-2">Nombre Completo</label>
-                                <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
+                                <input type="text" name="Nombre" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-2">Correo Electrónico</label>
-                                <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
+                                <input type="email" name="Email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
                             </div>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">Asunto (Servicio o Taller)</label>
-                            <select name="subject" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
-                                <option>Consultoría Fiscal</option>
-                                <option>Taller ITBIS / TSS</option>
-                                <option>Gestión de Nómina</option>
-                                <option>Otros</option>
+                            <select name="Asunto" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition">
+                                <option value="Consultoría Fiscal">Consultoría Fiscal</option>
+                                <option value="Taller ITBIS / TSS">Taller ITBIS / TSS</option>
+                                <option value="Gestión de Nómina">Gestión de Nómina</option>
+                                <option value="Otros">Otros</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">Mensaje</label>
-                            <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition"></textarea>
+                            <textarea name="Mensaje" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-elisaldi-light outline-none transition"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-elisaldi-dark text-white font-bold py-4 rounded-xl shadow-lg hover:bg-elisaldi-light transition">Enviar Mensaje</button>
                     </form>
@@ -249,7 +240,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-elisaldi-dark py-12 text-center text-white border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4">
             <span class="font-serif text-3xl font-bold tracking-tight block mb-4">Elisaldi</span>
