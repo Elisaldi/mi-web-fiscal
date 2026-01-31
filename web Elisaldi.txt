@@ -83,6 +83,12 @@
         .modal.active {
             display: flex;
         }
+        .blog-card {
+            transition: transform 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased">
@@ -92,7 +98,6 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center group cursor-pointer space-x-3">
-                    <!-- Logo del Brochure -->
                     <img src="image_72565a.png" alt="Elisaldi Logo" class="h-10 w-10 object-contain rounded-lg">
                     <span class="font-serif text-3xl font-bold text-elisaldi-dark tracking-tighter group-hover:text-elisaldi-light transition-colors">Elisaldi</span>
                 </div>
@@ -101,6 +106,7 @@
                     <a href="#nosotros" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Nosotros</a>
                     <a href="#servicios" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Servicios</a>
                     <a href="#talleres" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Talleres</a>
+                    <a href="#blog" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Blog</a>
                     <a href="#contacto" class="bg-elisaldi-dark text-white px-7 py-2.5 rounded-full text-sm font-bold hover:bg-elisaldi-light hover:shadow-lg transition-all">Contacto</a>
                 </div>
             </div>
@@ -128,7 +134,7 @@
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-5">
                 <a href="#servicios" class="bg-elisaldi-light text-elisaldi-dark font-bold px-10 py-4 rounded-full text-lg shadow-xl hover:bg-white transition-all transform hover:-translate-y-1">Nuestros Servicios</a>
-                <a href="#brochure" class="bg-white/10 text-white font-bold px-10 py-4 rounded-full text-lg backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all">Ver Brochure</a>
+                <a href="Folleto Brochure de Servicios Consultoria Elisaldi.pdf" target="_blank" class="bg-white/10 text-white font-bold px-10 py-4 rounded-full text-lg backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all">Ver Brochure</a>
             </div>
         </div>
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 animate-bounce">
@@ -189,13 +195,14 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                <!-- Contabilidad Fiscal -->
                 <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fas fa-receipt"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight">CONTABILIDAD FISCAL</h3>
+                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Contabilidad Fiscal</h3>
                         </div>
                         <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
                     </div>
@@ -212,13 +219,14 @@
                     </div>
                 </div>
 
+                <!-- Contabilidad Financiera -->
                 <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fas fa-chart-line"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight">CONTABILIDAD FINANCIERA</h3>
+                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Contabilidad Financiera</h3>
                         </div>
                         <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
                     </div>
@@ -230,13 +238,14 @@
                     </div>
                 </div>
 
+                <!-- Nómina -->
                 <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fas fa-users-gear"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight">NÓMINA Y TSS</h3>
+                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Nómina y TSS</h3>
                         </div>
                         <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
                     </div>
@@ -248,13 +257,14 @@
                     </div>
                 </div>
 
+                <!-- Otros -->
                 <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-6">
                             <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fas fa-ellipsis-h"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight">OTROS SERVICIOS</h3>
+                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Otros Servicios</h3>
                         </div>
                         <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
                     </div>
@@ -282,10 +292,10 @@
                         Descargue nuestro brochure oficial para conocer detalladamente nuestros valores, políticas de confidencialidad y el alcance total de nuestra consultoría.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="https://elisaldi.github.io/Folleto%20Brochure%20de%20Servicios%20Consultoria%20Elisaldi.pdf" target="_blank" class="bg-elisaldi-light text-elisaldi-dark font-bold px-8 py-4 rounded-2xl flex items-center hover:bg-white transition-all shadow-lg">
+                        <a href="Folleto Brochure de Servicios Consultoria Elisaldi.pdf" target="_blank" class="bg-elisaldi-light text-elisaldi-dark font-bold px-8 py-4 rounded-2xl flex items-center hover:bg-white transition-all shadow-lg">
                             <i class="fas fa-file-pdf mr-3 text-xl"></i> Ver Online
                         </a>
-                        <a href="https://elisaldi.github.io/Folleto%20Brochure%20de%20Servicios%20Consultoria%20Elisaldi.pdf" download class="bg-white/10 text-white font-bold px-8 py-4 rounded-2xl flex items-center border border-white/20 hover:bg-white/20 transition-all">
+                        <a href="Folleto Brochure de Servicios Consultoria Elisaldi.pdf" download class="bg-white/10 text-white font-bold px-8 py-4 rounded-2xl flex items-center border border-white/20 hover:bg-white/20 transition-all">
                             <i class="fas fa-download mr-3 text-xl"></i> Descargar
                         </a>
                     </div>
@@ -307,7 +317,8 @@
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div onclick="openModal('modal-itbis')" class="group cursor-pointer">
+                <!-- Taller 1 -->
+                <div onclick="openRegModal('IT-1 e ITBIS')" class="group cursor-pointer">
                     <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
                         <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-dark to-transparent opacity-60"></div>
@@ -319,7 +330,8 @@
                     <p class="text-slate-500 text-sm">Normativa 606, 607, 608 y proporcionalidad.</p>
                 </div>
 
-                <div onclick="openModal('modal-nomina')" class="group cursor-pointer">
+                <!-- Taller 2 -->
+                <div onclick="openRegModal('Nómina, TSS e Infotep')" class="group cursor-pointer">
                     <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
                         <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-dark to-transparent opacity-60"></div>
@@ -331,39 +343,146 @@
                     <p class="text-slate-500 text-sm">DGT-3, DGT-4 y manejo avanzado de Suir Plus.</p>
                 </div>
 
-                <div onclick="openModal('modal-ir7')" class="group cursor-pointer">
+                <!-- Taller 3 -->
+                <div onclick="openRegModal('IR-17 y Cierre Fiscal')" class="group cursor-pointer">
                     <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1586282391129-59a998fd034c?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1543269664-56d93c1b41a6?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="IR-17">
                         <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-dark to-transparent opacity-60"></div>
                         <div class="absolute bottom-6 left-6 text-white">
                             <span class="text-[10px] font-bold uppercase tracking-widest bg-elisaldi-light/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">Taller Técnico</span>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-light transition-colors mb-2">Declaración IR-7</h3>
+                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-light transition-colors mb-2">Declaración IR-7 / IR-17</h3>
                     <p class="text-slate-500 text-sm">Retenciones, IR-17 y cierre fiscal anual.</p>
                 </div>
 
-                <div onclick="openModal('modal-webinar')" class="group cursor-pointer">
+                <!-- Taller 4 -->
+                <div onclick="openRegModal('Contabilidad para Emprendedores')" class="group cursor-pointer">
                     <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1591115765373-520b7a217294?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Webinar Emprendedores">
                         <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-accent/80 to-transparent opacity-80"></div>
                         <div class="absolute bottom-6 left-6 text-white">
                             <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">Webinar Gratis</span>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-accent transition-colors mb-2">Contabilidad Emprendedores</h3>
-                    <p class="text-elisaldi-accent font-bold text-xs">20 FEB 2026</p>
+                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-accent transition-colors mb-2">Contabilidad para emprendedores</h3>
+                    <p class="text-slate-500 text-sm mb-2 italic">Lo que necesitas saber al iniciar tu emprendimiento y organizar tu negocio.</p>
+                    <p class="text-elisaldi-accent font-bold text-xs uppercase">Próximamente: 20 FEB 2026</p>
                 </div>
             </div>
 
             <div class="mt-24 text-center">
                 <div class="inline-block p-2 bg-slate-100 rounded-full animate-pulse-slow">
                     <a href="#contacto" class="flex items-center space-x-6 bg-elisaldi-dark text-white pl-10 pr-4 py-4 rounded-full group hover:bg-elisaldi-light transition-all shadow-2xl">
-                        <span class="text-xl font-bold tracking-tight">APARTA TU CUPO AHORA</span>
+                        <span class="text-xl font-bold tracking-tight uppercase">Aparta tu cupo ahora</span>
                         <div class="w-12 h-12 bg-white text-elisaldi-dark rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform shadow-inner">
                             <i class="fas fa-arrow-right"></i>
                         </div>
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Blog y Noticias -->
+    <section id="blog" class="py-24 bg-elisaldi-slate">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h4 class="text-elisaldi-light font-bold uppercase tracking-[0.3em] text-sm mb-4">Actualidad Fiscal</h4>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-elisaldi-dark">Blog & Noticias</h2>
+            </div>
+
+            <div class="bg-white rounded-[3rem] p-8 md:p-16 shadow-xl border border-slate-100">
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <div class="lg:w-2/5">
+                        <div class="sticky top-24">
+                            <span class="bg-red-100 text-red-600 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-6 inline-block italic">Alerta de Cambio Fiscal</span>
+                            <h3 class="text-3xl font-bold text-elisaldi-dark mb-6 leading-tight">Actualización de la Contribución Especial para Residuos Sólidos (CRS)</h3>
+                            <p class="text-slate-600 mb-8 leading-relaxed">
+                                La reciente promulgación de la <strong>Ley núm. 98-25</strong> ha modificado sustancialmente los montos de la contribución establecida originalmente en la Ley 225-20. Este cambio representa un incremento significativo en la carga para las personas jurídicas e instituciones a partir del cierre fiscal 2025.
+                            </p>
+                            <div class="p-6 bg-elisaldi-dark/5 rounded-2xl border-l-4 border-elisaldi-light">
+                                <p class="text-sm text-elisaldi-dark italic">
+                                    "La contribución es obligatoria independientemente de que se perciban o no beneficios y entrará en vigencia a partir del cierre fiscal del año 2025."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-3/5">
+                        <div class="mb-10 overflow-hidden rounded-3xl border border-slate-200">
+                            <div class="bg-elisaldi-dark text-white p-6 text-center">
+                                <h4 class="font-bold uppercase tracking-widest text-sm">Comparativa de Escalas de Pago (RD$)</h4>
+                                <p class="text-[10px] text-slate-300 mt-1 uppercase">Impacto Ley 225-20 vs Nueva Ley 98-25</p>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-50 text-elisaldi-dark">
+                                            <th class="p-5 border-b font-bold">Rango de Ingresos (Anual)</th>
+                                            <th class="p-5 border-b font-bold text-center text-slate-400">Anterior (225-20)</th>
+                                            <th class="p-5 border-b font-bold text-center text-red-600 bg-red-50">Nuevo Monto (98-25)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-slate-600">
+                                        <tr>
+                                            <td class="p-5 border-b">Hasta RD$ 1,000,000.00</td>
+                                            <td class="p-5 border-b text-center">RD$ 500.00</td>
+                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 3,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-5 border-b">RD$ 1,000,000.01 - RD$ 10,000,000.00</td>
+                                            <td class="p-5 border-b text-center">RD$ 1,500.00</td>
+                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 6,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-5 border-b">RD$ 10,000,000.01 - RD$ 25,000,000.00</td>
+                                            <td class="p-5 border-b text-center">RD$ 5,000.00</td>
+                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 20,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-5 border-b">RD$ 25,000,000.01 - RD$ 50,000,000.00</td>
+                                            <td class="p-5 border-b text-center">RD$ 30,000.00</td>
+                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 155,000.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-5 border-b">RD$ 50,000,000.01 - RD$ 100,000,000.00</td>
+                                            <td class="p-5 border-b text-center">RD$ 90,000.00</td>
+                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 260,000.00</td>
+                                        </tr>
+                                        <tr class="bg-slate-50/50">
+                                            <td class="p-5 border-b font-bold">Más de RD$ 100,000,000.01</td>
+                                            <td class="p-5 border-b text-center italic">RD$ 260,000.00</td>
+                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50">RD$ 675,000.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <h4 class="font-bold text-elisaldi-dark text-xl flex items-center">
+                                <i class="fas fa-exclamation-triangle text-elisaldi-accent mr-3"></i> 
+                                Análisis: Descontento en el Sector Empresarial
+                            </h4>
+                            <p class="text-slate-600 leading-relaxed">
+                                Este incremento ha generado una ola de reacciones negativas entre los contribuyentes. La principal queja radica en el carácter <strong>"obligatorio e independiente de beneficios"</strong> de esta contribución, lo que significa que empresas con pérdidas operacionales aún deberán pagar hasta RD$ 675,000.00 adicionales.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                                    <h5 class="text-elisaldi-dark font-bold text-sm mb-2 uppercase">Impacto PYME</h5>
+                                    <p class="text-xs text-slate-500 italic">"Un aumento del 500% en el primer rango (de 500 a 3,000) golpea directamente la liquidez de los pequeños emprendimientos que apenas inician."</p>
+                                </div>
+                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                                    <h5 class="text-elisaldi-dark font-bold text-sm mb-2 uppercase">Indexación Anual</h5>
+                                    <p class="text-xs text-slate-500 italic">"La nueva ley contempla indexaciones automáticas, lo que sugiere que estos montos no son estáticos y seguirán presionando el costo de cumplimiento fiscal."</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Publicado por Elisaldi Fiscal Team | Enero 2026</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -430,6 +549,19 @@
                                 <input type="email" name="Email" required class="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-slate-50 outline-none focus:border-elisaldi-light focus:bg-white transition-all">
                             </div>
                         </div>
+                        
+                        <div class="space-y-3">
+                            <label class="text-xs font-bold uppercase text-slate-400 tracking-widest">Tipo de Servicio / Consulta</label>
+                            <select name="Servicio" class="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-slate-50 outline-none focus:border-elisaldi-light focus:bg-white transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="Contabilidad Fiscal">Contabilidad Fiscal</option>
+                                <option value="Contabilidad Financiera">Contabilidad Financiera</option>
+                                <option value="Nomina y TSS">Nómina y TSS</option>
+                                <option value="Talleres y Capacitaciones">Talleres y Capacitaciones</option>
+                                <option value="Otros">Otros Servicios</option>
+                            </select>
+                        </div>
+
                         <div class="space-y-3">
                             <label class="text-xs font-bold uppercase text-slate-400 tracking-widest">Mensaje o Consulta</label>
                             <textarea name="Mensaje" rows="5" required class="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-slate-50 outline-none focus:border-elisaldi-light focus:bg-white transition-all resize-none"></textarea>
@@ -441,51 +573,38 @@
         </div>
     </section>
 
-    <!-- Modales de Talleres -->
-    <div id="modal-itbis" class="modal fixed inset-0 z-[60] bg-elisaldi-dark/95 items-center justify-center p-6" onclick="closeOnOverlay(event, 'modal-itbis')">
-        <div class="bg-white rounded-[3rem] max-w-2xl w-full p-12 relative shadow-2xl overflow-y-auto max-h-screen">
-            <button onclick="closeModal('modal-itbis')" class="absolute top-8 right-8 text-slate-300 hover:text-red-500 transition-colors text-3xl">&times;</button>
-            <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-6">Taller: IT-1 e ITBIS</h3>
-            <p class="text-slate-600 mb-6">Domine la preparación y envío de los formatos mensuales ante la DGII.</p>
-            <a href="#contacto" onclick="closeModal('modal-itbis')" class="block w-full text-center bg-elisaldi-dark text-white font-bold py-4 rounded-2xl">Consultar Calendario</a>
-        </div>
-    </div>
-
-    <div id="modal-nomina" class="modal fixed inset-0 z-[60] bg-elisaldi-dark/95 items-center justify-center p-6" onclick="closeOnOverlay(event, 'modal-nomina')">
-        <div class="bg-white rounded-[3rem] max-w-2xl w-full p-12 relative shadow-2xl">
-            <button onclick="closeModal('modal-nomina')" class="absolute top-8 right-8 text-slate-300 text-3xl">&times;</button>
-            <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-6 uppercase">Nómina y TSS</h3>
-            <p class="text-slate-600 mb-6 leading-relaxed">Gestión operativa de nómina y cumplimiento ante la TSS y el Ministerio de Trabajo.</p>
-            <a href="#contacto" onclick="closeModal('modal-nomina')" class="block w-full text-center bg-elisaldi-dark text-white font-bold py-4 rounded-2xl">Contactar</a>
-        </div>
-    </div>
-
-    <div id="modal-ir7" class="modal fixed inset-0 z-[60] bg-elisaldi-dark/95 items-center justify-center p-6" onclick="closeOnOverlay(event, 'modal-ir7')">
-        <div class="bg-white rounded-[3rem] max-w-2xl w-full p-12 relative shadow-2xl">
-            <button onclick="closeModal('modal-ir7')" class="absolute top-8 right-8 text-slate-300 text-3xl">&times;</button>
-            <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-6 uppercase">Cierre IR-7 e IR-17</h3>
-            <p class="text-slate-600 mb-6 leading-relaxed">Manejo de retenciones a terceros y la declaración jurada anual IR-7.</p>
-            <a href="#contacto" onclick="closeModal('modal-ir7')" class="block w-full text-center bg-elisaldi-dark text-white font-bold py-4 rounded-2xl">Consultar</a>
-        </div>
-    </div>
-
-    <div id="modal-webinar" class="modal fixed inset-0 z-[60] bg-elisaldi-dark/95 items-center justify-center p-6" onclick="closeOnOverlay(event, 'modal-webinar')">
-        <div class="bg-white rounded-[3rem] max-w-2xl w-full p-12 relative shadow-2xl border-4 border-elisaldi-accent">
-            <button onclick="closeModal('modal-webinar')" class="absolute top-8 right-8 text-slate-300 text-3xl">&times;</button>
-            <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-6 uppercase">Contabilidad Emprendedores</h3>
-            <p class="text-slate-600 mb-6 font-bold text-xl">20 de Febrero, 2026</p>
-            <a href="#contacto" onclick="closeModal('modal-webinar')" class="block w-full text-center bg-elisaldi-accent text-white font-bold py-4 rounded-2xl">Pre-inscripción</a>
-        </div>
-    </div>
-
-    <footer class="bg-white py-20 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex items-center justify-center space-x-3 mb-6">
-                <img src="image_72565a.png" alt="Elisaldi Logo Footer" class="h-8 w-8 object-contain rounded-lg">
-                <span class="font-serif text-4xl font-bold text-elisaldi-dark tracking-tighter block">Elisaldi</span>
+    <!-- Modal de Inscripción -->
+    <div id="modal-registration" class="modal fixed inset-0 z-[100] bg-elisaldi-dark/95 items-center justify-center p-6" onclick="closeOnOverlay(event, 'modal-registration')">
+        <div class="bg-white rounded-[3rem] max-w-xl w-full p-10 relative shadow-2xl overflow-y-auto max-h-[90vh]">
+            <button onclick="closeModal('modal-registration')" class="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors text-3xl">&times;</button>
+            <div class="text-center mb-8">
+                <span class="text-elisaldi-light text-xs font-bold uppercase tracking-widest">Inscripción 2026</span>
+                <h3 id="reg-title" class="text-3xl font-serif font-bold text-elisaldi-dark mt-2">Formulario de Registro</h3>
             </div>
-            <p class="text-slate-400 text-xs uppercase tracking-[0.4em] mb-4">Consultoría Fiscal & Financiera • 2026</p>
-            <p class="text-slate-300 text-[10px] max-w-md mx-auto">Santo Domingo Este, República Dominicana.</p>
+            <form action="https://formspree.io/f/mbdypddz" method="POST" class="space-y-5">
+                <input type="hidden" id="reg-course-input" name="Curso_Seleccionado">
+                <div>
+                    <label class="text-[10px] font-bold uppercase text-slate-400 mb-1 block">Nombre Completo</label>
+                    <input type="text" name="Estudiante" required class="w-full bg-slate-100 px-5 py-3 rounded-xl outline-none focus:ring-2 focus:ring-elisaldi-light">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold uppercase text-slate-400 mb-1 block">WhatsApp / Teléfono</label>
+                    <input type="tel" name="Telefono" required class="w-full bg-slate-100 px-5 py-3 rounded-xl outline-none focus:ring-2 focus:ring-elisaldi-light">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold uppercase text-slate-400 mb-1 block">Correo Electrónico</label>
+                    <input type="email" name="Email_Registro" required class="w-full bg-slate-100 px-5 py-3 rounded-xl outline-none focus:ring-2 focus:ring-elisaldi-light">
+                </div>
+                <button type="submit" class="w-full bg-elisaldi-dark text-white font-bold py-4 rounded-xl shadow-lg hover:bg-elisaldi-light transition-all mt-4">Completar Registro</button>
+                <p class="text-[10px] text-slate-400 text-center mt-4 uppercase tracking-tighter">Un asesor se pondrá en contacto para los detalles de pago.</p>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-elisaldi-dark py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="image_72565a.png" alt="Elisaldi" class="h-12 mx-auto mb-6 opacity-80 grayscale brightness-200">
+            <p class="text-slate-400 text-sm">&copy; 2026 Elisaldi Consultoría Fiscal & Financiera. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -495,14 +614,19 @@
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('active'));
             if (!isActive) card.classList.add('active');
         }
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
+
+        function openRegModal(courseName) {
+            document.getElementById('reg-title').innerText = courseName;
+            document.getElementById('reg-course-input').value = courseName;
+            document.getElementById('modal-registration').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
+
         function closeModal(id) {
             document.getElementById(id).classList.remove('active');
             document.body.style.overflow = 'auto';
         }
+
         function closeOnOverlay(e, id) {
             if (e.target.id === id) closeModal(id);
         }
