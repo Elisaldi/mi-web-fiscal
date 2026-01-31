@@ -1,635 +1,257 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elisaldi | Consultoría Fiscal & Financiera</title>
+    <title>Pro-Platform | Gestión Empresarial</title>
+    <!-- Tailwind CSS para diseño profesional -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        elisaldi: {
-                            dark: '#0D3D35',    // Verde Bosque
-                            light: '#72B4A5',   // Verde Agua
-                            accent: '#C4A47C',  // Dorado
-                            slate: '#F1F5F9'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- React y Babel para ejecutar JSX en el navegador -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- SDK de Firebase para base de datos en tiempo real (Versión Compatible) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <style>
-        .video-docker video {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -1;
-        }
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .service-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .service-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-        }
-        .service-card.active {
-            background-color: white;
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-            border-color: #72B4A5;
-        }
-        .service-card.active .service-content {
-            max-height: 500px;
-            opacity: 1;
-            padding-top: 1.5rem;
-        }
-        .service-card.active .chevron-icon {
-            transform: rotate(180deg);
-            color: #72B4A5;
-        }
-        .modal {
-            display: none;
-            backdrop-filter: blur(8px);
-        }
-        .modal.active {
-            display: flex;
-        }
-        .blog-card {
-            transition: transform 0.3s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+<body>
+    <div id="root"></div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 glass-nav border-b border-slate-200/50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center group cursor-pointer space-x-3">
-                    <img src="image_72565a.png" alt="Elisaldi Logo" class="h-10 w-10 object-contain rounded-lg">
-                    <span class="font-serif text-3xl font-bold text-elisaldi-dark tracking-tighter group-hover:text-elisaldi-light transition-colors">Elisaldi</span>
-                </div>
-                <div class="hidden md:flex items-center space-x-10">
-                    <a href="#inicio" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Inicio</a>
-                    <a href="#nosotros" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Nosotros</a>
-                    <a href="#servicios" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Servicios</a>
-                    <a href="#talleres" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Talleres</a>
-                    <a href="#blog" class="text-sm font-semibold text-slate-600 hover:text-elisaldi-dark transition-colors">Blog</a>
-                    <a href="#contacto" class="bg-elisaldi-dark text-white px-7 py-2.5 rounded-full text-sm font-bold hover:bg-elisaldi-light hover:shadow-lg transition-all">Contacto</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-    <!-- Hero Section -->
-    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="video-docker absolute inset-0">
-            <video class="absolute min-w-full min-h-full object-cover" autoplay muted loop playsinline>
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-business-charts-on-a-laptop-screen-close-up-34538-large.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-b from-elisaldi-dark/90 via-elisaldi-dark/80 to-elisaldi-dark/95"></div>
-        
-        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-            <div class="animate-float">
-                <h2 class="font-serif italic text-xl md:text-2xl text-elisaldi-light mb-6 tracking-wide">"La diligencia guiada por la sabiduría conduce a la abundancia"</h2>
-            </div>
-            <h1 class="text-5xl md:text-8xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
-                Consultoría Fiscal <br><span class="text-elisaldi-light">& Financiera</span>
-            </h1>
-            <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-                Soluciones eficientes que aportan valor, seguridad y crecimiento a su empresa bajo normativa fiscal dominicana.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-5">
-                <a href="#servicios" class="bg-elisaldi-light text-elisaldi-dark font-bold px-10 py-4 rounded-full text-lg shadow-xl hover:bg-white transition-all transform hover:-translate-y-1">Nuestros Servicios</a>
-                <a href="Folleto Brochure de Servicios Consultoria Elisaldi.pdf" target="_blank" class="bg-white/10 text-white font-bold px-10 py-4 rounded-full text-lg backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all">Ver Brochure</a>
-            </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl"></i>
-        </div>
-    </section>
+        // --- CONFIGURACIÓN DE FIREBASE ---
+        // Se intenta obtener la configuración del entorno global de forma segura
+        let firebaseConfig = {};
+        try {
+            if (typeof __firebase_config !== 'undefined') {
+                firebaseConfig = JSON.parse(__firebase_config);
+            } else {
+                // Configuración por defecto o vacía para evitar el error de Script
+                firebaseConfig = {
+                    apiKey: "", 
+                    authDomain: "tu-proyecto.firebaseapp.com",
+                    projectId: "tu-proyecto",
+                    storageBucket: "tu-proyecto.appspot.com",
+                    messagingSenderId: "12345",
+                    appId: "1:12345:web:abcde"
+                };
+            }
+        } catch (e) {
+            console.error("Error al parsear la configuración de Firebase:", e);
+        }
 
-    <!-- Quienes Somos -->
-    <section id="nosotros" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-20 items-center">
-                <div class="relative">
-                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-elisaldi-light/10 rounded-full blur-3xl"></div>
-                    <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&q=80&w=800" alt="Consultoría" class="relative rounded-[2.5rem] shadow-2xl z-10">
-                    <div class="absolute -bottom-6 -right-6 bg-elisaldi-accent p-8 rounded-3xl shadow-xl z-20 text-white">
-                        <span class="block text-4xl font-bold">10+</span>
-                        <span class="text-xs uppercase font-bold tracking-widest">Años de Experiencia</span>
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'plataforma-empresarial-v1';
+
+        // Inicializar Firebase de forma segura
+        let auth, db;
+        try {
+            if (!firebase.apps.length && firebaseConfig.apiKey) {
+                firebase.initializeApp(firebaseConfig);
+                auth = firebase.auth();
+                db = firebase.firestore();
+            }
+        } catch (err) {
+            console.error("Firebase no pudo inicializarse:", err);
+        }
+
+        function App() {
+            const [user, setUser] = useState(null);
+            const [activeTab, setActiveTab] = useState('dashboard');
+            const [records, setRecords] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [formData, setFormData] = useState({
+                nombre: '', email: '', empresa: '', sector: 'Tecnología', presupuesto: '5000'
+            });
+
+            useEffect(() => {
+                if (!firebase.apps.length || !db) {
+                    setLoading(false);
+                    return;
+                }
+
+                // Autenticación para habilitar Firestore
+                auth.signInAnonymously().catch(console.error);
+                const unsubscribeAuth = auth.onAuthStateChanged(u => setUser(u));
+
+                // Escucha de datos en tiempo real (Ruta estricta para persistencia pública)
+                const unsubscribeData = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('registros')
+                    .onSnapshot(snapshot => {
+                        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                        setRecords(data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)));
+                        setLoading(false);
+                    }, (err) => {
+                        console.error("Error en Firestore snapshot:", err);
+                        setLoading(false);
+                    });
+
+                return () => {
+                    unsubscribeAuth();
+                    unsubscribeData();
+                };
+            }, []);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!db) {
+                    alert("Base de datos no configurada correctamente.");
+                    return;
+                }
+                try {
+                    await db.collection('artifacts').doc(appId).collection('public').doc('data').collection('registros').add({
+                        ...formData,
+                        timestamp: new Date().toISOString()
+                    });
+                    setFormData({ nombre: '', email: '', empresa: '', sector: 'Tecnología', presupuesto: '5000' });
+                    setActiveTab('registros');
+                } catch (err) {
+                    console.error("Error al guardar:", err);
+                    alert("Error al guardar el registro.");
+                }
+            };
+
+            if (loading && firebase.apps.length) {
+                return (
+                    <div className="flex items-center justify-center min-h-screen">
+                        <div className="text-blue-600 font-bold animate-pulse">Cargando plataforma...</div>
                     </div>
-                </div>
-                <div>
-                    <h4 class="text-elisaldi-light font-bold uppercase tracking-[0.2em] text-sm mb-4">Trayectoria</h4>
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-elisaldi-dark mb-8 leading-tight">¿Quiénes Somos?</h2>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
-                        Contador Público Autorizado con más de 10 años de experiencia en contabilidad financiera, impuestos y auditoría. Nos adaptamos a los nuevos tiempos mediante herramientas tecnológicas que agilizan los procesos empresariales.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                        <div class="flex items-center space-x-3 text-slate-700 font-medium">
-                            <div class="w-8 h-8 rounded-full bg-elisaldi-light/20 flex items-center justify-center text-elisaldi-light">
-                                <i class="fas fa-check text-xs"></i>
+                );
+            }
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Header */}
+                    <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
+                        <div className="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
+                            <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black text-xs">P</div>
+                                <span className="font-extrabold tracking-tighter text-slate-800">PRO-PLATFORM</span>
                             </div>
-                            <span>Normativas NIC y NIIF</span>
+                            <nav className="flex bg-slate-100 p-1 rounded-xl">
+                                <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${activeTab === 'dashboard' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'}`}>Inicio</button>
+                                <button onClick={() => setActiveTab('form')} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${activeTab === 'form' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'}`}>Nuevo</button>
+                                <button onClick={() => setActiveTab('registros')} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${activeTab === 'registros' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'}`}>Cloud</button>
+                            </nav>
                         </div>
-                        <div class="flex items-center space-x-3 text-slate-700 font-medium">
-                            <div class="w-8 h-8 rounded-full bg-elisaldi-light/20 flex items-center justify-center text-elisaldi-light">
-                                <i class="fas fa-check text-xs"></i>
+                    </header>
+
+                    <main className="max-w-6xl mx-auto px-6 py-10 w-full flex-grow animate-fade-in">
+                        {!firebase.apps.length && (
+                            <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl mb-6 text-amber-700 text-sm">
+                                <strong>Aviso:</strong> La configuración de Firebase no está detectada. Los datos se mostrarán localmente pero no se sincronizarán hasta que se añadan las claves.
                             </div>
-                            <span>Soluciones Tecnológicas</span>
-                        </div>
-                    </div>
-                    <div class="p-8 bg-elisaldi-dark rounded-3xl text-white">
-                        <h3 class="text-xl font-bold mb-3 italic text-elisaldi-light">Políticas de Calidad</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            Nos comprometemos a ofrecer servicios de alta calidad basados en el profesionalismo, responsabilidad y mejora continua para brindar seguridad a nuestros clientes.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                        )}
 
-    <!-- Servicios Interactivos -->
-    <section id="servicios" class="py-24 bg-elisaldi-slate">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20">
-                <h4 class="text-elisaldi-light font-bold uppercase tracking-[0.3em] text-sm mb-4">Expertise</h4>
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-elisaldi-dark mb-6">Nuestros Servicios</h2>
-                <p class="text-slate-500">Seleccione un área para explorar nuestra propuesta de valor detallada.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-                <!-- Contabilidad Fiscal -->
-                <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fas fa-receipt"></i>
+                        {activeTab === 'dashboard' && (
+                            <div className="space-y-8">
+                                <div className="bg-slate-900 rounded-[2rem] p-10 text-white shadow-2xl relative overflow-hidden">
+                                    <h2 className="text-3xl font-black mb-2">Monitor Empresarial</h2>
+                                    <p className="text-slate-400">Datos sincronizados en tiempo real con la nube.</p>
+                                    <div className="absolute -right-10 -bottom-10 opacity-10 text-[10rem]">📊</div>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                                        <p className="text-slate-400 text-[10px] font-black uppercase">Registros Totales</p>
+                                        <h3 className="text-4xl font-black mt-1">{records.length}</h3>
+                                    </div>
+                                    <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                                        <p className="text-slate-400 text-[10px] font-black uppercase">Capital Gestionado</p>
+                                        <h3 className="text-4xl font-black mt-1 text-blue-600">
+                                            {records.reduce((a, b) => a + Number(b.presupuesto), 0).toLocaleString()}€
+                                        </h3>
+                                    </div>
+                                    <div className="bg-blue-600 p-6 rounded-3xl text-white shadow-lg">
+                                        <p className="text-blue-200 text-[10px] font-black uppercase">Estado de Red</p>
+                                        <h3 className="text-xl font-bold mt-1 flex items-center gap-2">
+                                            <span className={`w-2 h-2 rounded-full animate-pulse ${db ? 'bg-green-400' : 'bg-red-400'}`}></span>
+                                            {db ? 'En Línea' : 'Desconectado'}
+                                        </h3>
+                                    </div>
+                                </div>
                             </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Contabilidad Fiscal</h3>
-                        </div>
-                        <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
-                    </div>
-                    <div class="service-content">
-                        <div class="h-px bg-slate-100 mb-6 w-full"></div>
-                        <p class="text-slate-600 leading-relaxed mb-4">
-                            Garantizamos el cumplimiento de declaraciones mensuales y anuales, asegurando el correcto pago de impuestos y la representación ante la DGII conforme a la normativa vigente.
-                        </p>
-                        <ul class="grid grid-cols-1 gap-2 text-sm text-slate-500 font-medium">
-                            <li class="flex items-center"><i class="fas fa-arrow-right text-[10px] mr-2 text-elisaldi-light"></i> ITBIS e IT-1</li>
-                            <li class="flex items-center"><i class="fas fa-arrow-right text-[10px] mr-2 text-elisaldi-light"></i> IR-1, IR-2 e IR-17</li>
-                            <li class="flex items-center"><i class="fas fa-arrow-right text-[10px] mr-2 text-elisaldi-light"></i> Formatos de Envío (606, 607, 608)</li>
-                        </ul>
-                    </div>
-                </div>
+                        )}
 
-                <!-- Contabilidad Financiera -->
-                <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fas fa-chart-line"></i>
+                        {activeTab === 'form' && (
+                            <div className="max-w-lg mx-auto bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
+                                <h2 className="text-2xl font-black mb-6 text-slate-800">Nuevo Registro</h2>
+                                <form onSubmit={handleSubmit} className="space-y-4">
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Representante</label>
+                                        <input placeholder="Nombre Completo" className="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-600 transition-all" required onChange={e => setFormData({...formData, nombre: e.target.value})} value={formData.nombre} />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Empresa</label>
+                                        <input placeholder="Razón Social" className="w-full p-4 rounded-2xl bg-slate-50 border-none ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-600 transition-all" required onChange={e => setFormData({...formData, empresa: e.target.value})} value={formData.empresa} />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-1">
+                                            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Sector</label>
+                                            <select className="w-full p-4 rounded-2xl bg-slate-50 ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-600 transition-all" onChange={e => setFormData({...formData, sector: e.target.value})} value={formData.sector}>
+                                                <option>Tecnología</option>
+                                                <option>Fiscal</option>
+                                                <option>Industrial</option>
+                                            </select>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="text-[10px] font-bold text-slate-400 uppercase ml-1">Presupuesto (€)</label>
+                                            <input type="number" placeholder="Ej: 5000" className="w-full p-4 rounded-2xl bg-slate-50 ring-1 ring-slate-200 outline-none focus:ring-2 focus:ring-blue-600 transition-all" onChange={e => setFormData({...formData, presupuesto: e.target.value})} value={formData.presupuesto} />
+                                        </div>
+                                    </div>
+                                    <button type="submit" className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black shadow-lg shadow-blue-200 transition-all hover:bg-blue-700 active:scale-95">Guardar en Cloud</button>
+                                </form>
                             </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Contabilidad Financiera</h3>
-                        </div>
-                        <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
-                    </div>
-                    <div class="service-content">
-                        <div class="h-px bg-slate-100 mb-6 w-full"></div>
-                        <p class="text-slate-600 leading-relaxed">
-                            Preparación de estados financieros confiables elaborados conforme a las NIC y NIIF, proporcionando información clara que respalda la toma de decisiones y la salud financiera.
-                        </p>
-                    </div>
-                </div>
+                        )}
 
-                <!-- Nómina -->
-                <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fas fa-users-gear"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Nómina y TSS</h3>
-                        </div>
-                        <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
-                    </div>
-                    <div class="service-content">
-                        <div class="h-px bg-slate-100 mb-6 w-full"></div>
-                        <p class="text-slate-600 leading-relaxed">
-                            Gestión integral de nómina, garantizando deducciones correctas, prestaciones, vacaciones y cumplimiento ante la TSS y la DGII, adaptado a cada empresa.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Otros -->
-                <div class="service-card group bg-white border border-slate-200 p-8 rounded-[2rem] cursor-pointer" onclick="toggleService(this)">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-6">
-                            <div class="w-16 h-16 bg-elisaldi-dark rounded-2xl flex items-center justify-center text-elisaldi-light text-2xl group-hover:scale-110 transition-transform">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-elisaldi-dark tracking-tight uppercase">Otros Servicios</h3>
-                        </div>
-                        <i class="fas fa-chevron-down text-slate-300 chevron-icon"></i>
-                    </div>
-                    <div class="service-content">
-                        <div class="h-px bg-slate-100 mb-6 w-full"></div>
-                        <ul class="space-y-3 text-slate-600">
-                            <li class="flex items-center"><i class="fas fa-plus text-[10px] mr-3 text-elisaldi-light"></i> Constitución de empresas</li>
-                            <li class="flex items-center"><i class="fas fa-plus text-[10px] mr-3 text-elisaldi-light"></i> Participación en licitaciones</li>
-                            <li class="flex items-center"><i class="fas fa-plus text-[10px] mr-3 text-elisaldi-light"></i> Gestión de inventarios</li>
-                            <li class="flex items-center"><i class="fas fa-plus text-[10px] mr-3 text-elisaldi-light"></i> Políticas contables</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Brochure PDF Section -->
-    <section id="brochure" class="py-24 bg-elisaldi-dark overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="bg-gradient-to-r from-white/5 to-white/10 p-12 md:p-20 rounded-[3rem] border border-white/10 flex flex-col md:flex-row items-center gap-16">
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-8">Nuestra Propuesta Completa</h2>
-                    <p class="text-slate-300 text-lg mb-10 leading-relaxed">
-                        Descargue nuestro brochure oficial para conocer detalladamente nuestros valores, políticas de confidencialidad y el alcance total de nuestra consultoría.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="Folleto Brochure de Servicios Consultoria Elisaldi.pdf" target="_blank" class="bg-elisaldi-light text-elisaldi-dark font-bold px-8 py-4 rounded-2xl flex items-center hover:bg-white transition-all shadow-lg">
-                            <i class="fas fa-file-pdf mr-3 text-xl"></i> Ver Online
-                        </a>
-                        <a href="Folleto Brochure de Servicios Consultoria Elisaldi.pdf" download class="bg-white/10 text-white font-bold px-8 py-4 rounded-2xl flex items-center border border-white/20 hover:bg-white/20 transition-all">
-                            <i class="fas fa-download mr-3 text-xl"></i> Descargar
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 relative group">
-                    <div class="absolute inset-0 bg-elisaldi-light/20 blur-[100px] rounded-full opacity-50"></div>
-                    <img src="image_72565a.png" alt="Elisaldi Brochure" class="relative rounded-2xl shadow-2xl border border-white/10 transform rotate-3 group-hover:rotate-0 transition-transform duration-700 ease-out max-h-[500px] mx-auto">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Talleres Técnicos -->
-    <section id="talleres" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h4 class="text-elisaldi-light font-bold uppercase tracking-[0.3em] text-sm mb-4">Capacitaciones 2026</h4>
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-elisaldi-dark">Formación Especializada</h2>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Taller 1 -->
-                <div onclick="openRegModal('IT-1 e ITBIS')" class="group cursor-pointer">
-                    <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-dark to-transparent opacity-60"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <span class="text-[10px] font-bold uppercase tracking-widest bg-elisaldi-light/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">Taller Técnico</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-light transition-colors mb-2">Declaración IT-1 e ITBIS</h3>
-                    <p class="text-slate-500 text-sm">Normativa 606, 607, 608 y proporcionalidad.</p>
-                </div>
-
-                <!-- Taller 2 -->
-                <div onclick="openRegModal('Nómina, TSS e Infotep')" class="group cursor-pointer">
-                    <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-dark to-transparent opacity-60"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <span class="text-[10px] font-bold uppercase tracking-widest bg-elisaldi-light/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">Taller Técnico</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-light transition-colors mb-2">Nómina, TSS e Infotep</h3>
-                    <p class="text-slate-500 text-sm">DGT-3, DGT-4 y manejo avanzado de Suir Plus.</p>
-                </div>
-
-                <!-- Taller 3 -->
-                <div onclick="openRegModal('IR-17 y Cierre Fiscal')" class="group cursor-pointer">
-                    <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1543269664-56d93c1b41a6?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="IR-17">
-                        <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-dark to-transparent opacity-60"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <span class="text-[10px] font-bold uppercase tracking-widest bg-elisaldi-light/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">Taller Técnico</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-light transition-colors mb-2">Declaración IR-7 / IR-17</h3>
-                    <p class="text-slate-500 text-sm">Retenciones, IR-17 y cierre fiscal anual.</p>
-                </div>
-
-                <!-- Taller 4 -->
-                <div onclick="openRegModal('Contabilidad para Emprendedores')" class="group cursor-pointer">
-                    <div class="relative h-64 overflow-hidden rounded-[2.5rem] mb-6 shadow-lg">
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Webinar Emprendedores">
-                        <div class="absolute inset-0 bg-gradient-to-t from-elisaldi-accent/80 to-transparent opacity-80"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">Webinar Gratis</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-elisaldi-dark group-hover:text-elisaldi-accent transition-colors mb-2">Contabilidad para emprendedores</h3>
-                    <p class="text-slate-500 text-sm mb-2 italic">Lo que necesitas saber al iniciar tu emprendimiento y organizar tu negocio.</p>
-                    <p class="text-elisaldi-accent font-bold text-xs uppercase">Próximamente: 20 FEB 2026</p>
-                </div>
-            </div>
-
-            <div class="mt-24 text-center">
-                <div class="inline-block p-2 bg-slate-100 rounded-full animate-pulse-slow">
-                    <a href="#contacto" class="flex items-center space-x-6 bg-elisaldi-dark text-white pl-10 pr-4 py-4 rounded-full group hover:bg-elisaldi-light transition-all shadow-2xl">
-                        <span class="text-xl font-bold tracking-tight uppercase">Aparta tu cupo ahora</span>
-                        <div class="w-12 h-12 bg-white text-elisaldi-dark rounded-full flex items-center justify-center group-hover:translate-x-2 transition-transform shadow-inner">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Blog y Noticias -->
-    <section id="blog" class="py-24 bg-elisaldi-slate">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h4 class="text-elisaldi-light font-bold uppercase tracking-[0.3em] text-sm mb-4">Actualidad Fiscal</h4>
-                <h2 class="text-4xl md:text-5xl font-serif font-bold text-elisaldi-dark">Blog & Noticias</h2>
-            </div>
-
-            <div class="bg-white rounded-[3rem] p-8 md:p-16 shadow-xl border border-slate-100">
-                <div class="flex flex-col lg:flex-row gap-12">
-                    <div class="lg:w-2/5">
-                        <div class="sticky top-24">
-                            <span class="bg-red-100 text-red-600 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-6 inline-block italic">Alerta de Cambio Fiscal</span>
-                            <h3 class="text-3xl font-bold text-elisaldi-dark mb-6 leading-tight">Actualización de la Contribución Especial para Residuos Sólidos (CRS)</h3>
-                            <p class="text-slate-600 mb-8 leading-relaxed">
-                                La reciente promulgación de la <strong>Ley núm. 98-25</strong> ha modificado sustancialmente los montos de la contribución establecida originalmente en la Ley 225-20. Este cambio representa un incremento significativo en la carga para las personas jurídicas e instituciones a partir del cierre fiscal 2025.
-                            </p>
-                            <div class="p-6 bg-elisaldi-dark/5 rounded-2xl border-l-4 border-elisaldi-light">
-                                <p class="text-sm text-elisaldi-dark italic">
-                                    "La contribución es obligatoria independientemente de que se perciban o no beneficios y entrará en vigencia a partir del cierre fiscal del año 2025."
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:w-3/5">
-                        <div class="mb-10 overflow-hidden rounded-3xl border border-slate-200">
-                            <div class="bg-elisaldi-dark text-white p-6 text-center">
-                                <h4 class="font-bold uppercase tracking-widest text-sm">Comparativa de Escalas de Pago (RD$)</h4>
-                                <p class="text-[10px] text-slate-300 mt-1 uppercase">Impacto Ley 225-20 vs Nueva Ley 98-25</p>
-                            </div>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-sm border-collapse">
-                                    <thead>
-                                        <tr class="bg-slate-50 text-elisaldi-dark">
-                                            <th class="p-5 border-b font-bold">Rango de Ingresos (Anual)</th>
-                                            <th class="p-5 border-b font-bold text-center text-slate-400">Anterior (225-20)</th>
-                                            <th class="p-5 border-b font-bold text-center text-red-600 bg-red-50">Nuevo Monto (98-25)</th>
+                        {activeTab === 'registros' && (
+                            <div className="bg-white rounded-[2rem] border border-slate-200 overflow-hidden shadow-sm">
+                                <table className="w-full text-left">
+                                    <thead className="bg-slate-50 text-[10px] font-black text-slate-400 uppercase border-b border-slate-100">
+                                        <tr>
+                                            <th className="px-8 py-4">Empresa</th>
+                                            <th className="px-8 py-4">Sector</th>
+                                            <th className="px-8 py-4 text-right">Monto</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="text-slate-600">
-                                        <tr>
-                                            <td class="p-5 border-b">Hasta RD$ 1,000,000.00</td>
-                                            <td class="p-5 border-b text-center">RD$ 500.00</td>
-                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 3,000.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-5 border-b">RD$ 1,000,000.01 - RD$ 10,000,000.00</td>
-                                            <td class="p-5 border-b text-center">RD$ 1,500.00</td>
-                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 6,000.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-5 border-b">RD$ 10,000,000.01 - RD$ 25,000,000.00</td>
-                                            <td class="p-5 border-b text-center">RD$ 5,000.00</td>
-                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 20,000.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-5 border-b">RD$ 25,000,000.01 - RD$ 50,000,000.00</td>
-                                            <td class="p-5 border-b text-center">RD$ 30,000.00</td>
-                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 155,000.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-5 border-b">RD$ 50,000,000.01 - RD$ 100,000,000.00</td>
-                                            <td class="p-5 border-b text-center">RD$ 90,000.00</td>
-                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50/50">RD$ 260,000.00</td>
-                                        </tr>
-                                        <tr class="bg-slate-50/50">
-                                            <td class="p-5 border-b font-bold">Más de RD$ 100,000,000.01</td>
-                                            <td class="p-5 border-b text-center italic">RD$ 260,000.00</td>
-                                            <td class="p-5 border-b text-center font-bold text-red-600 bg-red-50">RD$ 675,000.00</td>
-                                        </tr>
+                                    <tbody className="divide-y divide-slate-100">
+                                        {records.map(r => (
+                                            <tr key={r.id} className="hover:bg-slate-50 transition-colors group">
+                                                <td className="px-8 py-5 font-bold text-slate-800">
+                                                    {r.empresa} 
+                                                    <p className="text-[10px] text-slate-400 font-normal">{r.nombre}</p>
+                                                </td>
+                                                <td className="px-8 py-5">
+                                                    <span className="bg-slate-100 text-slate-500 text-[10px] px-2 py-1 rounded-md font-bold uppercase">{r.sector}</span>
+                                                </td>
+                                                <td className="px-8 py-5 text-right font-mono font-bold text-blue-600">
+                                                    {Number(r.presupuesto).toLocaleString()}€
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
+                                {records.length === 0 && (
+                                    <div className="p-20 text-center text-slate-400 text-sm">No hay registros almacenados.</div>
+                                )}
                             </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <h4 class="font-bold text-elisaldi-dark text-xl flex items-center">
-                                <i class="fas fa-exclamation-triangle text-elisaldi-accent mr-3"></i> 
-                                Análisis: Descontento en el Sector Empresarial
-                            </h4>
-                            <p class="text-slate-600 leading-relaxed">
-                                Este incremento ha generado una ola de reacciones negativas entre los contribuyentes. La principal queja radica en el carácter <strong>"obligatorio e independiente de beneficios"</strong> de esta contribución, lo que significa que empresas con pérdidas operacionales aún deberán pagar hasta RD$ 675,000.00 adicionales.
-                            </p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                                    <h5 class="text-elisaldi-dark font-bold text-sm mb-2 uppercase">Impacto PYME</h5>
-                                    <p class="text-xs text-slate-500 italic">"Un aumento del 500% en el primer rango (de 500 a 3,000) golpea directamente la liquidez de los pequeños emprendimientos que apenas inician."</p>
-                                </div>
-                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                                    <h5 class="text-elisaldi-dark font-bold text-sm mb-2 uppercase">Indexación Anual</h5>
-                                    <p class="text-xs text-slate-500 italic">"La nueva ley contempla indexaciones automáticas, lo que sugiere que estos montos no son estáticos y seguirán presionando el costo de cumplimiento fiscal."</p>
-                                </div>
-                            </div>
-                            <div class="flex justify-end">
-                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Publicado por Elisaldi Fiscal Team | Enero 2026</p>
-                            </div>
-                        </div>
-                    </div>
+                        )}
+                    </main>
+                    <footer className="p-8 text-center text-[10px] font-bold text-slate-300 uppercase tracking-widest">
+                        Cloud Database Enabled • Infrastructure 2024
+                    </footer>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Contacto -->
-    <section id="contacto" class="py-24 bg-elisaldi-slate">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="bg-white rounded-[3.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-slate-100">
-                <div class="lg:w-1/3 bg-elisaldi-dark p-16 text-white relative">
-                    <div class="relative z-10">
-                        <h2 class="text-4xl font-serif font-bold mb-12">Contacto</h2>
-                        <div class="space-y-10">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-elisaldi-light shrink-0">
-                                    <i class="fas fa-location-dot"></i>
-                                </div>
-                                <p class="text-slate-300 leading-relaxed pt-2">Calle La Pared, <br> Santo Domingo Este, RD.</p>
-                            </div>
-                            <div class="flex items-start space-x-6">
-                                <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-elisaldi-light shrink-0">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="pt-2">
-                                    <p class="text-slate-300">(829) 687-9987</p>
-                                    <p class="text-slate-300">(809) 953-0836</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-6">
-                                <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-elisaldi-light shrink-0">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <p class="text-slate-300 pt-3">Consultorias@elisaldi.com.do</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-20">
-                            <p class="text-xs uppercase font-bold tracking-[0.2em] text-elisaldi-light mb-6">Redes Sociales</p>
-                            <div class="flex space-x-5">
-                                <a href="https://www.instagram.com/consultoriafiscalelisaldi?igsh=MTdlZW81dmprODh5aA==" target="_blank" class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-2xl hover:bg-elisaldi-light hover:text-elisaldi-dark transition-all transform hover:-translate-y-1">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-2xl hover:bg-elisaldi-light hover:text-elisaldi-dark transition-all transform hover:-translate-y-1">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-2xl hover:bg-elisaldi-light hover:text-elisaldi-dark transition-all transform hover:-translate-y-1">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="lg:w-2/3 p-16 md:p-20">
-                    <h2 class="text-3xl font-serif font-bold text-elisaldi-dark mb-4">¿Tiene alguna consulta?</h2>
-                    <form action="https://formspree.io/f/mbdypddz" method="POST" class="space-y-8">
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div class="space-y-3">
-                                <label class="text-xs font-bold uppercase text-slate-400 tracking-widest">Nombre Completo</label>
-                                <input type="text" name="Nombre" required class="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-slate-50 outline-none focus:border-elisaldi-light focus:bg-white transition-all">
-                            </div>
-                            <div class="space-y-3">
-                                <label class="text-xs font-bold uppercase text-slate-400 tracking-widest">Correo Electrónico</label>
-                                <input type="email" name="Email" required class="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-slate-50 outline-none focus:border-elisaldi-light focus:bg-white transition-all">
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-3">
-                            <label class="text-xs font-bold uppercase text-slate-400 tracking-widest">Tipo de Servicio / Consulta</label>
-                            <select name="Servicio" class="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-slate-50 outline-none focus:border-elisaldi-light focus:bg-white transition-all appearance-none cursor-pointer">
-                                <option value="" disabled selected>Seleccione una opción</option>
-                                <option value="Contabilidad Fiscal">Contabilidad Fiscal</option>
-                                <option value="Contabilidad Financiera">Contabilidad Financiera</option>
-                                <option value="Nomina y TSS">Nómina y TSS</option>
-                                <option value="Talleres y Capacitaciones">Talleres y Capacitaciones</option>
-                                <option value="Otros">Otros Servicios</option>
-                            </select>
-                        </div>
-
-                        <div class="space-y-3">
-                            <label class="text-xs font-bold uppercase text-slate-400 tracking-widest">Mensaje o Consulta</label>
-                            <textarea name="Mensaje" rows="5" required class="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-slate-50 outline-none focus:border-elisaldi-light focus:bg-white transition-all resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-elisaldi-dark text-white font-bold py-5 rounded-2xl shadow-xl hover:bg-elisaldi-light transition-all transform active:scale-95">Enviar Mensaje</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal de Inscripción -->
-    <div id="modal-registration" class="modal fixed inset-0 z-[100] bg-elisaldi-dark/95 items-center justify-center p-6" onclick="closeOnOverlay(event, 'modal-registration')">
-        <div class="bg-white rounded-[3rem] max-w-xl w-full p-10 relative shadow-2xl overflow-y-auto max-h-[90vh]">
-            <button onclick="closeModal('modal-registration')" class="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors text-3xl">&times;</button>
-            <div class="text-center mb-8">
-                <span class="text-elisaldi-light text-xs font-bold uppercase tracking-widest">Inscripción 2026</span>
-                <h3 id="reg-title" class="text-3xl font-serif font-bold text-elisaldi-dark mt-2">Formulario de Registro</h3>
-            </div>
-            <form action="https://formspree.io/f/mbdypddz" method="POST" class="space-y-5">
-                <input type="hidden" id="reg-course-input" name="Curso_Seleccionado">
-                <div>
-                    <label class="text-[10px] font-bold uppercase text-slate-400 mb-1 block">Nombre Completo</label>
-                    <input type="text" name="Estudiante" required class="w-full bg-slate-100 px-5 py-3 rounded-xl outline-none focus:ring-2 focus:ring-elisaldi-light">
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold uppercase text-slate-400 mb-1 block">WhatsApp / Teléfono</label>
-                    <input type="tel" name="Telefono" required class="w-full bg-slate-100 px-5 py-3 rounded-xl outline-none focus:ring-2 focus:ring-elisaldi-light">
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold uppercase text-slate-400 mb-1 block">Correo Electrónico</label>
-                    <input type="email" name="Email_Registro" required class="w-full bg-slate-100 px-5 py-3 rounded-xl outline-none focus:ring-2 focus:ring-elisaldi-light">
-                </div>
-                <button type="submit" class="w-full bg-elisaldi-dark text-white font-bold py-4 rounded-xl shadow-lg hover:bg-elisaldi-light transition-all mt-4">Completar Registro</button>
-                <p class="text-[10px] text-slate-400 text-center mt-4 uppercase tracking-tighter">Un asesor se pondrá en contacto para los detalles de pago.</p>
-            </form>
-        </div>
-    </div>
-
-    <footer class="bg-elisaldi-dark py-12 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <img src="image_72565a.png" alt="Elisaldi" class="h-12 mx-auto mb-6 opacity-80 grayscale brightness-200">
-            <p class="text-slate-400 text-sm">&copy; 2026 Elisaldi Consultoría Fiscal & Financiera. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-        function toggleService(card) {
-            const isActive = card.classList.contains('active');
-            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('active'));
-            if (!isActive) card.classList.add('active');
+            );
         }
 
-        function openRegModal(courseName) {
-            document.getElementById('reg-title').innerText = courseName;
-            document.getElementById('reg-course-input').value = courseName;
-            document.getElementById('modal-registration').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function closeOnOverlay(e, id) {
-            if (e.target.id === id) closeModal(id);
-        }
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
     </script>
 </body>
 </html>
