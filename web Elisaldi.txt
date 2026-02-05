@@ -166,7 +166,13 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between h-20 items-center">
                 <a href="#inicio" class="flex items-center group cursor-pointer space-x-3">
-                    <img src="image_72565a.png" alt="Elisaldi Logo" class="h-10 w-10 object-contain rounded-lg">
+                   <a href="#inicio" class="flex items-center group cursor-pointer space-x-3">
+    <!-- AQUÍ -->
+    <img src="image_72565a.png" alt="Elisaldi Logo" class="h-10 w-10 object-contain rounded-lg">
+    <span class="font-serif text-3xl font-bold text-elisaldi-dark tracking-tighter">
+        Elisaldi
+    </span>
+</a>
                     <span class="font-serif text-3xl font-bold text-elisaldi-dark tracking-tighter group-hover:text-elisaldi-light transition-colors">Elisaldi</span>
                 </a>
                 <div class="hidden md:flex items-center space-x-10">
@@ -871,3 +877,4 @@
     </div>
 </body>
 </html>
+
