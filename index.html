@@ -828,12 +828,16 @@
             </button>
             <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-2">Reserva tu Cupo</h3>
             <p id="tallerNombre" class="text-elisaldi-light font-bold mb-8 uppercase tracking-widest text-sm"></p>
-            <form class="space-y-6">
-                <input type="text" placeholder="Tu Nombre Completo" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light">
-                <input type="email" placeholder="Correo de Empresa" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light">
-                <input type="tel" placeholder="WhatsApp / Teléfono" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light">
-                <button type="button" onclick="closeRegModal()" class="w-full bg-elisaldi-dark text-white font-bold py-5 rounded-2xl hover:bg-elisaldi-light transition-all shadow-lg">Solicitar Información</button>
-            </form>
+           <form action="https://formspree.io/f/mbdypddz" method="POST" class="space-y-4">
+    <input type="hidden" name="Taller_Interes" id="taller-input">
+    <input type="text" name="Nombre_Cliente" placeholder="Nombre completo" required class="w-full px-4 py-3 border border-slate-200 rounded-xl">
+    <input type="email" name="Email_Cliente" placeholder="Correo electrónico" required class="w-full px-4 py-3 border border-slate-200 rounded-xl">
+    <input type="tel" name="Telefono" placeholder="WhatsApp / Teléfono" required class="w-full px-4 py-3 border border-slate-200 rounded-xl">
+    
+    <button type="submit" class="w-full bg-elisaldi-dark text-white font-bold py-4 rounded-xl hover:bg-elisaldi-light transition-all shadow-lg uppercase tracking-wider text-sm">
+        Confirmar Registro
+    </button>
+</form>
         </div>
     </div>
 
@@ -876,24 +880,27 @@
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
         });
+<form action="https://formspree.io/f/mbdypddz" method="POST" id="contactForm" class="space-y-6">
+    <div class="grid md:grid-cols-2 gap-6">
+        <input type="text" name="Nombre" placeholder="Nombre completo" required class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-elisaldi-light focus:ring-0 outline-none transition-all">
+        <input type="email" name="Email" placeholder="Correo electrónico" required class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-elisaldi-light focus:ring-0 outline-none transition-all">
+    </div>
+    <input type="text" name="Asunto" placeholder="Asunto del mensaje" class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-elisaldi-light focus:ring-0 outline-none transition-all">
+    <textarea name="Mensaje" rows="5" placeholder="¿En qué podemos ayudarle?" required class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:border-elisaldi-light focus:ring-0 outline-none transition-all"></textarea>
+    
+    <button type="submit" class="w-full bg-elisaldi-dark text-white font-bold py-5 rounded-2xl hover:bg-elisaldi-light shadow-xl transition-all uppercase tracking-widest">
+        Enviar Mensaje
+    </button>
+</form>
 
-        // Form Submission
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const form = document.getElementById('contactForm');
-            const success = document.getElementById('formSuccess');
-            
-            form.classList.add('hidden');
-            success.classList.remove('hidden');
-        }
-
-        function resetForm() {
-            const form = document.getElementById('contactForm');
-            const success = document.getElementById('formSuccess');
-            
-            form.reset();
-            form.classList.remove('hidden');
-            success.classList.add('hidden');
+<div id="formSuccess" class="hidden text-center py-10">
+    <div class="w-20 h-20 bg-elisaldi-light/20 text-elisaldi-light rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+        <i class="fas fa-check"></i>
+    </div>
+    <h3 class="text-2xl font-bold text-elisaldi-dark mb-2">¡Mensaje Enviado!</h3>
+    <p class="text-slate-500 mb-8">Gracias por contactarnos. Le responderemos a la brevedad posible.</p>
+    <button onclick="resetForm()" class="text-elisaldi-light font-bold hover:underline">Enviar otro mensaje</button>
+</div>
         }
 
         // Efecto scroll header
