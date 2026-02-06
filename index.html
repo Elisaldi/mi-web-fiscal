@@ -948,13 +948,20 @@
         }
 
         // Modal de Registro
-       function openRegModal(name) {
-    document.getElementById('tallerNombre').innerText = name;
-    document.getElementById('tallerInput').value = name;
+   <script>
+  function openRegModal(nombre) {
+    document.getElementById('tallerNombre').textContent = nombre;
+    document.getElementById('tallerInput').value = nombre;
     document.getElementById('regModal').classList.add('active');
     document.body.style.overflow = 'hidden';
+  }
 
-}
+  function closeRegModal() {
+    document.getElementById('regModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+</script>
+
 
         function closeRegModal() {
             document.getElementById('regModal').classList.remove('active');
@@ -1024,6 +1031,7 @@
 </body>
 
 </html>
+
 
 
 
