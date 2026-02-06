@@ -839,6 +839,44 @@
             </div>
         </div>
     </footer>
+<script>
+  // --- ACAORDIÓN SERVICIOS ---
+  document.addEventListener("DOMContentLoaded", function() {
+    // Obtener todas las tarjetas
+    const cards = document.querySelectorAll('.service-card');
+
+    cards.forEach(card => {
+      card.addEventListener('click', function() {
+        // Alternar la clase active en esta tarjeta
+        const isActive = card.classList.contains("active");
+
+        // Cerrar todas
+        cards.forEach(c => c.classList.remove("active"));
+
+        // Si estaba cerrado, abrirlo
+        if (!isActive) {
+          card.classList.add("active");
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Acordeón de servicios */
+  .service-content {
+    display: none;
+  }
+  .service-card.active .service-content {
+    display: block;
+  }
+  .service-card .chevron-icon {
+    transition: transform 0.3s ease;
+  }
+  .service-card.active .chevron-icon {
+    transform: rotate(180deg);
+  }
+</style>
 
     <!-- Botón WhatsApp Flotante -->
     <a href="https://wa.me/18099530836" target="_blank" class="fixed bottom-8 right-8 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center text-3xl shadow-2xl z-50 hover:scale-110 transition-transform animate-bounce">
@@ -1018,6 +1056,7 @@
 </body>
 
 </html>
+
 
 
 
