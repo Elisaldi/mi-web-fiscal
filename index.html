@@ -854,11 +854,46 @@
             <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-2">Reserva tu Cupo</h3>
             <p id="tallerNombre" class="text-elisaldi-light font-bold mb-8 uppercase tracking-widest text-sm"></p>
             
-                <input type="text" placeholder="Tu Nombre Completo" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light">
-                <input type="email" placeholder="Correo de Empresa" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light">
-                <input type="tel" placeholder="WhatsApp / Teléfono" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light">
-                <button type="button" onclick="closeRegModal()" class="w-full bg-elisaldi-dark text-white font-bold py-5 rounded-2xl hover:bg-elisaldi-light transition-all shadow-lg">Solicitar Información</button>
-            </form>
+               <form
+  action="https://formspree.io/f/mbdypddz"
+  method="POST"
+  class="space-y-6"
+>
+  <!-- Identificadores -->
+  <input type="hidden" name="tipo" value="Registro Taller">
+  <input type="hidden" name="taller" id="tallerInput">
+
+  <input
+    type="text"
+    name="nombre"
+    placeholder="Tu Nombre Completo"
+    required
+    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
+  >
+
+  <input
+    type="email"
+    name="email"
+    placeholder="Correo de Empresa"
+    required
+    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
+  >
+
+  <input
+    type="tel"
+    name="telefono"
+    placeholder="WhatsApp / Teléfono"
+    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
+  >
+
+  <button
+    type="submit"
+    class="w-full bg-elisaldi-dark text-white font-bold py-5 rounded-2xl hover:bg-elisaldi-light transition-all shadow-lg"
+  >
+    Solicitar Información
+  </button>
+</form>
+
         </div>
     </div>
 
@@ -880,10 +915,12 @@
         }
 
         // Modal de Registro
-        function openRegModal(name) {
-            document.getElementById('tallerNombre').innerText = name;
-            document.getElementById('regModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+       function openRegModal(name) {
+    document.getElementById('tallerNombre').innerText = name;
+    document.getElementById('tallerInput').value = name;
+    document.getElementById('regModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
         }
 
         function closeRegModal() {
@@ -954,3 +991,4 @@
 </body>
 
 </html>
+
