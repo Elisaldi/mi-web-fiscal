@@ -846,75 +846,65 @@
     </a>
 
     <!-- Modal de Registro a Talleres -->
-    <div id="regModal" class="modal fixed inset-0 z-[60] items-center justify-center px-6">
-        <div class="absolute inset-0 bg-elisaldi-dark/80" onclick="closeRegModal()"></div>
-        <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-10 relative z-10 animate-slide-up shadow-2xl">
-            <button onclick="closeRegModal()" class="absolute top-6 right-6 text-slate-400 hover:text-elisaldi-dark">
-                <i class="fas fa-times text-2xl"></i>
-            </button>
-            <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-2">Reserva tu Cupo</h3>
-            <p id="tallerNombre" class="text-elisaldi-light font-bold mb-8 uppercase tracking-widest text-sm"></p>
-            
-               <form
-  action="https://formspree.io/f/mbdypddz"
-  method="POST"
-  class="space-y-6"
->
-  <!-- Identificadores -->
-  <input type="hidden" name="tipo" value="Registro Taller">
-  <input type="hidden" name="taller" id="tallerInput">
+<div id="regModal" class="modal fixed inset-0 z-[60] flex items-center justify-center px-6">
+  <div class="absolute inset-0 bg-elisaldi-dark/80" onclick="closeRegModal()"></div>
 
-  <input
-    type="text"
-    name="nombre"
-    placeholder="Tu Nombre Completo"
-    required
-    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
-  >
+  <div class="bg-white rounded-[2.5rem] w-full max-w-md p-10 relative z-10 animate-slide-up shadow-2xl">
+    <button onclick="closeRegModal()" class="absolute top-6 right-6 text-slate-400 hover:text-elisaldi-dark">
+      <i class="fas fa-times text-2xl"></i>
+    </button>
 
-  <input
-    type="email"
-    name="email"
-    placeholder="Correo de Empresa"
-    required
-    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
-  >
+    <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-1">
+      Reserva tu cupo
+    </h3>
+    <p id="tallerNombre" class="text-elisaldi-light font-bold mb-6 uppercase tracking-widest text-sm"></p>
 
- <form
-  action="https://formspree.io/f/mbdypddz"
-  method="POST"
-  class="space-y-6"
->
-  <!-- Campos ocultos -->
-  <input type="hidden" name="tipo" value="Registro Taller">
-  <input type="hidden" name="taller" id="tallerInput">
+    <form
+      action="https://formspree.io/f/mbdypddz"
+      method="POST"
+      class="space-y-4"
+    >
+      <!-- Identificadores -->
+      <input type="hidden" name="origen" value="Registro Taller / Webinar">
+      <input type="hidden" name="taller" id="tallerInput">
 
-  <input
-    type="text"
-    name="nombre"
-    placeholder="Tu Nombre Completo"
-    required
-    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
-  >
+      <input
+        type="text"
+        name="nombre"
+        placeholder="Nombre completo"
+        required
+        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg outline-none focus:border-elisaldi-light"
+      >
 
-  <input
-    type="email"
-    name="email"
-    placeholder="Correo de Empresa"
-    required
-    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
-  >
+      <input
+        type="email"
+        name="email"
+        placeholder="Correo electrónico"
+        required
+        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg outline-none focus:border-elisaldi-light"
+      >
 
-  <input
-    type="tel"
-    name="telefono"
-    placeholder="WhatsApp / Teléfono"
-    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 outline-none focus:border-elisaldi-light"
-  >
+      <input
+        type="tel"
+        name="telefono"
+        placeholder="WhatsApp (opcional)"
+        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg outline-none focus:border-elisaldi-light"
+      >
 
-  <button
-    type="submit"
-    class="w-full bg-elisaldi-dark text-white font-bold py-5 rounded-2xl hover:bg-elisaldi-light transition-all shadow-lg"
+      <button
+        type="submit"
+        class="w-full bg-elisaldi-dark text-white font-bold py-5 rounded-2xl hover:bg-elisaldi-light transition-all shadow-xl text-lg"
+      >
+        Quiero inscribirme
+      </button>
+
+      <p class="text-xs text-slate-400 text-center mt-2">
+        Cupos limitados · Confirmación por correo
+      </p>
+    </form>
+  </div>
+</div>
+
   >
     Solicitar Información
   </button>
@@ -948,7 +938,6 @@
     document.body.style.overflow = 'hidden';
 
 }
-        }
 
         function closeRegModal() {
             document.getElementById('regModal').classList.remove('active');
@@ -1018,6 +1007,7 @@
 </body>
 
 </html>
+
 
 
 
