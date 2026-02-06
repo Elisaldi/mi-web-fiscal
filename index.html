@@ -845,19 +845,44 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Modal de Registro a Talleres -->
-<div id="regModal" class="modal fixed inset-0 z-[60] flex items-center justify-center px-6">
-  <div class="absolute inset-0 bg-elisaldi-dark/80" onclick="closeRegModal()"></div>
+  
+  >
+    Solicitar Información
+  </button>
+</form>
 
-  <div class="bg-white rounded-[2.5rem] w-full max-w-md p-10 relative z-10 animate-slide-up shadow-2xl">
-    <button onclick="closeRegModal()" class="absolute top-6 right-6 text-slate-400 hover:text-elisaldi-dark">
-      <i class="fas fa-times text-2xl"></i>
+        </div>
+    </div>
+<!-- Modal Registro Taller / Webinar -->
+<div id="regModal" class="modal fixed inset-0 z-[999] flex items-center justify-center px-6">
+  
+  <!-- Fondo oscuro clickeable -->
+  <div 
+    class="absolute inset-0 bg-elisaldi-dark/80 cursor-pointer"
+    onclick="closeRegModal()">
+  </div>
+
+  <!-- Caja -->
+  <div class="relative bg-white rounded-[2.5rem] w-full max-w-md p-10 z-10 shadow-2xl animate-slide-up">
+    
+    <!-- Botón cerrar -->
+    <button
+      type="button"
+      onclick="closeRegModal()"
+      class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-elisaldi-dark transition"
+    >
+      ✕
     </button>
 
     <h3 class="text-3xl font-serif font-bold text-elisaldi-dark mb-1">
       Reserva tu cupo
     </h3>
-    <p id="tallerNombre" class="text-elisaldi-light font-bold mb-6 uppercase tracking-widest text-sm"></p>
+
+    <!-- AQUÍ APARECE EL NOMBRE DEL WEBINAR -->
+    <p
+      id="tallerNombre"
+      class="text-elisaldi-light font-bold uppercase tracking-widest text-sm mb-6"
+    ></p>
 
     <form
       action="https://formspree.io/f/mbdypddz"
@@ -873,7 +898,7 @@
         name="nombre"
         placeholder="Nombre completo"
         required
-        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg outline-none focus:border-elisaldi-light"
+        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg focus:border-elisaldi-light outline-none"
       >
 
       <input
@@ -881,14 +906,14 @@
         name="email"
         placeholder="Correo electrónico"
         required
-        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg outline-none focus:border-elisaldi-light"
+        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg focus:border-elisaldi-light outline-none"
       >
 
       <input
         type="tel"
         name="telefono"
         placeholder="WhatsApp (opcional)"
-        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg outline-none focus:border-elisaldi-light"
+        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-lg focus:border-elisaldi-light outline-none"
       >
 
       <button
@@ -898,20 +923,12 @@
         Quiero inscribirme
       </button>
 
-      <p class="text-xs text-slate-400 text-center mt-2">
+      <p class="text-xs text-slate-400 text-center">
         Cupos limitados · Confirmación por correo
       </p>
     </form>
   </div>
 </div>
-
-  >
-    Solicitar Información
-  </button>
-</form>
-
-        </div>
-    </div>
 
     <!-- Scripts de Funcionalidad -->
     <script>
@@ -1007,6 +1024,7 @@
 </body>
 
 </html>
+
 
 
 
